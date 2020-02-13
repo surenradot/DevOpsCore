@@ -1,0 +1,42 @@
+﻿@model List<CoreApp.Models.UserDto>
+@{
+    ViewData["Title"] = "User";
+}
+
+<h2>User List</h2>
+<a class="btn btn-primary" asp-controller="home" asp-action="AddEdit"> <i class="glyphicon-plus"></i> Add</a>
+<div class="row">
+    <div class="table-responsive">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>S.R</th>
+                    <th>Profile Image</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>DOB</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderBy(a=>a.Id))
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td> <img src="~/images/@(!string.IsNullOrEmpty(item.Image)?item.Image:"user.png")" width="50" height="50" /> </td>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.DOB.Value.ToString("dd, MM yyyy")</td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="home" asp-action="AddEdit" asp-route-id="@item.Id"> <i class="glyphicon-pencil"></i> Edit</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
